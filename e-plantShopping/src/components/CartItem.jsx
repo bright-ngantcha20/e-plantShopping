@@ -1,20 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   incrementQuantity,
   decrementQuantity,
   removeItem,
 } from "../redux/CartSlice";
-
 import { Link } from "react-router-dom";
 
 const CartItem = () => {
-
   const cartItems = useSelector(
-    state => state.cart.items
+    (state) => state.cart.items
   );
 
   const dispatch = useDispatch();
+
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   const totalCost = cartItems.reduce(
     (total, item) =>
@@ -23,21 +25,22 @@ const CartItem = () => {
   );
 
   return (
-
-    <div>
-
+    <div className="cart-container">
       <h2>Shopping Cart</h2>
+
+      <h3>Total Items: {totalItems}</h3>
 
       <h3>Total Cost: ${totalCost}</h3>
 
-      {cartItems.map(item => (
-
-        <div key={item.id} className="cart-card">
-
+      {cartItems.map((item) => (
+        <div
+          key={item.id}
+          className="cart-card"
+        >
           <img
             src={item.image}
             alt={item.name}
-            width="100"
+            width="120"
           />
 
           <h3>{item.name}</h3>
@@ -45,27 +48,40 @@ const CartItem = () => {
           <p>Unit Price: ${item.price}</p>
 
           <p>
-            Total:
-            ${item.price * item.quantity}
+            Item Total: $
+            {item.price * item.quantity}
           </p>
 
-          <button
-            onClick={() =>
-              dispatch(incrementQuantity(item.id))
-            }
-          >
-            +
-          </button>
+          <div>
+            <button
+              onClick={() =>
+                dispatch(
+                  incrementQuantity(item.id)
+                )
+              }
+            >
+              +
+            </button>
 
-          <span>{item.quantity}</span>
+            <span
+              style={{
+                margin: "0 10px",
+                fontWeight: "bold",
+              }}
+            >
+              {item.quantity}
+            </span>
 
-          <button
-            onClick={() =>
-              dispatch(decrementQuantity(item.id))
-            }
-          >
-            -
-          </button>
+            <button
+              onClick={() =>
+                dispatch(
+                  decrementQuantity(item.id)
+                )
+              }
+            >
+              -
+            </button>
+          </div>
 
           <button
             onClick={() =>
@@ -74,7 +90,6 @@ const CartItem = () => {
           >
             Delete
           </button>
-
         </div>
       ))}
 
@@ -86,12 +101,13 @@ const CartItem = () => {
 
       <button
         onClick={() =>
-          alert("Coming Soon")
+          alert(
+            "Checkout feature coming soon!"
+          )
         }
       >
         Checkout
       </button>
-
     </div>
   );
 };
