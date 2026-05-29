@@ -30,7 +30,7 @@ function App() {
 
               <Link to="/plants">
 
-                <button>
+                <button onClick={() => console.log("Navigating to products")}>>
                   Get Started
                 </button>
 
