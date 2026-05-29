@@ -1,18 +1,20 @@
-const AboutUs = () => {
-
+function AboutUs() {
   return (
-
-    <div className="about-page">
-
-      <h1>Paradise Nursery</h1>
+    <div className="about-us-container">
+      <h2>About Paradise Nursery</h2>
 
       <p>
-        Paradise Nursery offers beautiful indoor plants
-        that improve air quality and brighten your home.
+        Paradise Nursery is a trusted online plant store that offers a wide
+        variety of high-quality indoor and outdoor plants for homes and offices.
       </p>
 
+      <p>
+        Our mission is to make plant ownership simple and enjoyable by
+        providing healthy plants, affordable prices, and expert care advice
+        for plant lovers everywhere.
+      </p>
     </div>
   );
-};
+}
 
 export default AboutUs;
